@@ -3,6 +3,7 @@ import { crm } from "./services/suitecrm";
 import "./App.css";
 import Modules from "./Modules/Modules";
 import List from "./Modules/List/List";
+import { modulesCollection, moduleList } from "./constants/crm";
 
 import { useState } from "react";
 
@@ -12,7 +13,11 @@ function App() {
 
   useEffect(() => {
     const getModules = async () => {
-      const modules = await crm.getModules();
+      const crmModules = await crm.getModules();
+      const modules = {}
+      modulesCollection.forEach ( (moduleName) => {
+        if (crmModules[moduleName]) modules[moduleName] =crmModules[moduleName]
+      })
       setModules(modules);
     };
 
@@ -27,8 +32,8 @@ function App() {
 
   return (
     <>
-      <Modules modules={modules} />
-      <List list={list} />
+      <Modules modules={modules} modulesCollection = {modulesCollection} />
+      <List list={list} fields = {moduleList.Accounts.listFields}/>
     </>
   );
 }

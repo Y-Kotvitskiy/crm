@@ -10,15 +10,18 @@ ul {
   list-style-type: none;
 }
 
-.modules {
+.modules-menu {
   display: flex;
   flex-wrap:wrap;
+  font-size: 1.5em;
 }
 
-.modules li {margin: 0 5px;}
+.modules-menu li {margin: 0 5px;}
 
 .module-list__element-title {
   text-align: left;
+  font-size: 1.2em;
+  color: rgba(255,128,128, 0.8);
   border-bottom: 2px solid rgba(255,255,255, 0.1);
 }
 
@@ -29,14 +32,16 @@ ul {
 
 .module-list__field {
   margin: 2px 5px;
-  background-color: rgba(255,255,255, 0.1);
+  border-bottom: 1px solid rgba(255,255,255, 0.2);
 }
 
 .module-list__field-title {
   font-weight: 100;
+  padding: 0 5px;
   color: rgba(255,255,255, 0.7);
 }
 
 .module-list__field-value {
-  padding-left: 1em;
+  padding: 0 3px;
+  background-color: rgba(128, 255, 128, 0.11);
 }
