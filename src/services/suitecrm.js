@@ -1,10 +1,6 @@
-// const URL = "http://167.99.40.116/Api",
-//   client_id = `c78a4ae5-8e32-4ef0-5373-6690f4e2c9e5`,
-//   client_secret = `test_api2`;
-
-const URL = "http://crm14.wsl/Api",
-  client_id = `4fe90608-5ddd-7e06-1306-668d02867b9e`,
-  client_secret = `test`;
+const URL = "http://zomro.my:8080/Api",
+  client_id = `64f2ab0d-d60f-ab9d-f451-6692662970e0`,
+  client_secret = `api_user`;
 
 const crm = {
   access_token: null,
@@ -41,6 +37,24 @@ const crm = {
       result = await responce.json();
     return result.data.attributes;
   },
+
+  getList: async (module = `Accounts`) => {
+    if (!crm.access_token) {
+      await crm.getToken();
+    }
+
+    const responce = await fetch(URL + `/V8/module/` + 'Accounts', {
+        method: `GET`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + crm.access_token,
+        },
+      }),
+      result = await responce.json();
+    return result.data;
+  },
+
+
 };
 
 export { crm };

@@ -1,24 +1,36 @@
 import { useEffect } from "react";
 import { crm } from "./services/suitecrm";
 import "./App.css";
-import Modules from "./Midules/Modules";
+import Modules from "./Modules/Modules";
+import List from "./Modules/List/List";
+
 import { useState } from "react";
 
 function App() {
+  const [modules, setModules] = useState({});
+  const [list, setList] = useState([]);
 
+  useEffect(() => {
+    const getModules = async () => {
+      const modules = await crm.getModules();
+      setModules(modules);
+    };
 
-  const [modules, setModules] = useState({})
+    const getList = async () => {
+      const list = await crm.getList();
+      setList(list);
+    };
 
-  const getModules = async () => {
-      const modules = await crm.getModules()
-      setModules(modules)
-  }
+    getModules();
+    getList();
+  }, []);
 
-  useEffect( () => {
-    getModules()
-    }, []);
-
-  return <> <Modules modules={modules}/></>;
+  return (
+    <>
+      <Modules modules={modules} />
+      <List list={list} />
+    </>
+  );
 }
 
 export default App;

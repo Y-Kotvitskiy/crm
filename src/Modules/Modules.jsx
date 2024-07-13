@@ -1,10 +1,11 @@
-export default function Modules({ modules }) {
+export default function Modules({ modules = {}}) {
   const showProperties = (moduleKey) => {
     const moduleTitle = modules[moduleKey].label
       ? modules[moduleKey].label
       : moduleKey;
     return <span> {moduleTitle}</span> ;
   };
+
   return (
     <>
       <ul className='modules'>
