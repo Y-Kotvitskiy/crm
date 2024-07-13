@@ -3,7 +3,7 @@ const Record = ({ record, fields : fieldsProps, title = `name` }) => {
 
   return (
     <div className="module-list__element">
-      <p className="module-list__element-title">{record[title]}</p>
+      <h2 className="module-list__element-title">{record[title]}</h2>
       <ul className="module-list__element-attibutes">
         {fields.map((fieldName, index) => {
           let value = record[fieldName];

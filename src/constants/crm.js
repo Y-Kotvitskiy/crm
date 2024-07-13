@@ -2,7 +2,20 @@ const modulesCollection = [`Accounts`, `Contacts`, `Calls`];
 
 const moduleList = {
   Accounts: {
-    listFields: [
+    fields: [
+      `name`,
+      `phone_office`,
+      `account_type`,
+      `assigned_user_name`,
+      `date_entered`,
+    ],
+    sord: `name`,
+  },
+};
+
+const detailView = {
+  Accounts: {
+    fields: [
       `name`,
       `phone_office`,
       `account_type`,
@@ -10,8 +23,7 @@ const moduleList = {
       `date_entered`,
       `description`,
     ],
-    sord: `name`,
   },
 };
 
-export { moduleList, modulesCollection };
+export { modulesCollection, moduleList,detailView };

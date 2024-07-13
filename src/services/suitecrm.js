@@ -43,7 +43,7 @@ const crm = {
       await crm.getToken();
     }
 
-    const responce = await fetch(URL + `/V8/module/` + 'Accounts', {
+    const responce = await fetch(URL + `/V8/module/` + "Accounts", {
         method: `GET`,
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +54,23 @@ const crm = {
     return result.data;
   },
 
+  getRecod: async (module = `Accounts`, id) => {
+    if (!crm.access_token) {
+      await crm.getToken();
+    }
 
+    const url = URL + `/V8/module/${module}/${id}`
+
+    const responce = await fetch(url, {
+        method: `GET`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + crm.access_token,
+        },
+      }),
+      result = await responce.json();
+    return result.data;
+  },
 };
 
 export { crm };
