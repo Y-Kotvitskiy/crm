@@ -19,6 +19,10 @@ ul {
   margin: 0 5px;
 }
 
+.modules-menu a.active{
+  text-decoration: underline;
+}
+
 .module-list__element-title, .detailview__title {
   text-align: left;
   font-size: 1.2em;

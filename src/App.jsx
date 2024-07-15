@@ -5,8 +5,9 @@ import Modules from "./Modules/Modules";
 import List from "./Modules/List/List";
 import { modulesCollection, moduleList, detailView } from "./constants/crm";
 import DetailView from "./Modules/DetailView/DetailView";
-
 import { useState } from "react";
+import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
+import Home from "./Home/Home";
 
 function App() {
   const [modules, setModules] = useState({});
@@ -43,11 +44,16 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Router>
       <Modules modules={modules} modulesCollection={modulesCollection} />
-      <List list={list} fields={moduleList.Accounts.fields} />
-      {record ? <DetailView record={record} fields={detailView.Accounts.fields} /> : null}
-    </>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Router>
+    //   <>
+    //   <List list={list} fields={moduleList.Accounts.fields} />
+    //   {record ? <DetailView record={record} fields={detailView.Accounts.fields} /> : null}
+    // </>
   );
 }
 
