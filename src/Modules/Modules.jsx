@@ -10,6 +10,7 @@ export default function Modules({ modules = {} }) {
   return (
     <nav>
       <ul className="modules-menu">
+      <li key="home"> <NavLink to="/">Home</NavLink></li>
         {Object.keys(modules).map((moduleKey, index) => (
           <li key={index}>
             <NavLink to={"/Modules/" + moduleKey}>

@@ -1,17 +1,15 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { crm } from "./services/suitecrm";
 import "./App.css";
 import Modules from "./Modules/Modules";
 import List from "./Modules/List/List";
 import { modulesCollection, moduleList, detailView } from "./constants/crm";
 import DetailView from "./Modules/DetailView/DetailView";
-import { useState } from "react";
 import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./Home/Home";
 
 function App() {
   const [modules, setModules] = useState({});
-  const [list, setList] = useState([]);
   const [record, setRecord] = useState(null);
 
   useEffect(() => {
@@ -25,11 +23,6 @@ function App() {
       setModules(modules);
     };
 
-    const getList = async () => {
-      const list = await crm.getList();
-      setList(list);
-    };
-
     const getRecord = async () => {
       const crmRecord = await crm.getRecod(
         `Accounts`,
@@ -39,7 +32,6 @@ function App() {
     };
 
     getModules();
-    getList();
     getRecord();
   }, []);
 
@@ -48,6 +40,7 @@ function App() {
       <Modules modules={modules} modulesCollection={modulesCollection} />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="Modules/:name" element={<List />} />
       </Routes>
     </Router>
     //   <>

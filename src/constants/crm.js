@@ -11,6 +11,25 @@ const moduleList = {
     ],
     sord: `name`,
   },
+  Contacts: {
+    fields: [
+      `first_name`,
+      `last_name`,
+      `parent_name`,
+      `phone_work`,
+      `date_entered`,
+    ],
+    sord: `name`,
+  },
+  Calls: {
+    fields: [
+      `name`,
+      `parent_name`,
+      `direction`,
+      `date_entered`,
+    ],
+    sord: `name`,
+  },
 };
 
 const detailView = {

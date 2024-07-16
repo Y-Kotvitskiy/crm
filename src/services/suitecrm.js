@@ -43,7 +43,7 @@ const crm = {
       await crm.getToken();
     }
 
-    const responce = await fetch(URL + `/V8/module/` + "Accounts", {
+    const responce = await fetch(URL + `/V8/module/` + module, {
         method: `GET`,
         headers: {
           "Content-Type": "application/json",
