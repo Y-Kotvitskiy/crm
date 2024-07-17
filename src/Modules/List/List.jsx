@@ -6,25 +6,31 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function List() {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null);
+  const [fields, setFields] = useState([]);
   const { name } = useParams();
   useEffect(() => {
     const getList = async () => {
       const list = await crm.getList(name);
       setList(list);
     };
-    setList([])
     getList();
+    
   }, [name]);
 
-  if (list.length === 0) return null;
-  
-  const fields = (moduleList[name] && moduleList[name].fields.length > 0) 
-    ? moduleList[name].fields
-    : Object.keys(list.attributes)
+  useEffect(() => {
+    if (list && list.length > 0) {
+      setFields(() => {
+        return moduleList[name] && moduleList[name].fields
+          ? moduleList[name].fields
+          : Object.keys(list[0].attributes);
+      });
+    }
+  }, [list]);
 
-
-  return (
+  return !list ? (
+    `Data loading`
+  ) : list.length > 0  && fields.length > 0 ? (
     <ul className="module-list">
       {list.map((elem) => (
         <li key={elem.id}>
@@ -32,5 +38,5 @@ export default function List() {
         </li>
       ))}
     </ul>
-  );
+  ) : null;
 }

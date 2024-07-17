@@ -35,7 +35,6 @@ export default function Modules() {
     <nav>
       <ul className="modules-menu">
         <li key="home">
-          {" "}
           <NavLink to="/">Home</NavLink>
         </li>
         {Object.keys(modules).map((moduleKey, index) => (

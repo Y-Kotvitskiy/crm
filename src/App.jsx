@@ -29,7 +29,7 @@ function App() {
       <Modules />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="Modules/:name/:id" element={<DetailView />} />
+        <Route path="Modules/:module/:id" element={<DetailView />} />
         <Route path="Modules/:name" element={<List />} />
       </Routes>
     </Router>
