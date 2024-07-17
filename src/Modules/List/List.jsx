@@ -1,4 +1,4 @@
-import Record from "./Record/Record";
+import ListRecord from "./ListRecord/ListRecord";
 import { moduleList } from "./../../constants/crm";
 import { crm } from "./../../services/suitecrm";
 
@@ -13,19 +13,22 @@ export default function List() {
       const list = await crm.getList(name);
       setList(list);
     };
+    setList([])
     getList();
   }, [name]);
 
-  console.log(name);
-
-  const fields = moduleList[name].fields;
   if (list.length === 0) return null;
+  
+  const fields = (moduleList[name] && moduleList[name].fields.length > 0) 
+    ? moduleList[name].fields
+    : Object.keys(list.attributes)
+
 
   return (
     <ul className="module-list">
       {list.map((elem) => (
         <li key={elem.id}>
-          <Record record={elem.attributes} fields={fields} />
+          <ListRecord id={elem.id} record={elem.attributes} fields={fields} />
         </li>
       ))}
     </ul>
