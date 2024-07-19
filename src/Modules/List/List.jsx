@@ -9,13 +9,13 @@ export default function List() {
   const [list, setList] = useState(null);
   const [fields, setFields] = useState([]);
   const { name } = useParams();
+
   useEffect(() => {
     const getList = async () => {
       const list = await crm.getList(name);
       setList(list);
     };
     getList();
-    
   }, [name]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function List() {
 
   return !list ? (
     `Data loading`
-  ) : list.length > 0  && fields.length > 0 ? (
+  ) : list.length > 0 && fields.length > 0 ? (
     <ul className="module-list">
       {list.map((elem) => (
         <li key={elem.id}>

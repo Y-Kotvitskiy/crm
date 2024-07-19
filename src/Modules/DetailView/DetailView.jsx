@@ -6,19 +6,17 @@ import ModuleField from "../ModuleField/ModuleField";
 
 const DetailView = () => {
   const { module, id } = useParams();
-
   const [record, setRecord] = useState(null);
   const [fields, setFields] = useState([]);
 
   useEffect(() => {
     const getRecord = async () => {
       const crmRecord = await crm.getRecod(module, id);
-      console.log(`crmRecord`, crmRecord);
       setRecord(crmRecord);
     };
 
     getRecord();
-  }, []);
+  }, [module, id]);
 
   useEffect(() => {
     if (record) {
@@ -37,7 +35,12 @@ const DetailView = () => {
 
   return !!record && fields.length > 0 ? (
     <section className="detailview">
-      <h2 className="detailview__title">{record.attributes[title]}</h2>
+      <h2 className="detailview__title">
+        <span className="detailview__module_title">{record.type}: </span>
+        <span className="detailview__record_name">
+          {record.attributes[title]}
+        </span>
+      </h2>
       <ul>
         {fields.map((title) => (
           <ModuleField

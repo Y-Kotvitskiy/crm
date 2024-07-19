@@ -24,8 +24,7 @@ ul {
   text-decoration: underline;
 }
 
-.module-list__element-title,
-.detailview__title a {
+.module-list__element-title {
   text-align: left;
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
@@ -33,14 +32,12 @@ ul {
 .module-list__element-title a {
   font-size: 1.2em;
   color: rgba(255, 128, 128, 0.8);
-
 }
 
 .module-list__element-attibutes {
   display: flex;
   flex-wrap: wrap;
 }
-
 
 .module-field {
   margin: 2px 5px;
@@ -54,7 +51,7 @@ ul {
 }
 
 .detailview {
-  padding: 40px;
+  padding-left: 40px;
 }
 
 .detailview .module-field {
@@ -73,15 +70,26 @@ ul {
   padding: 0 1em;
 }
 
+.detailview__title {
+  padding-left: 40px;
+  display: flex;
+}
 
+.detailview__module_title,
 .detailview .module-field__title {
   text-align: right;
   flex-grow: 1;
   flex-basis: 1em;
 }
 
-.detailview .module-field__field-value {
+.detailview .module-field__field-value,
+.detailview__record_name {
   text-align: left;
   flex-grow: 1;
   flex-basis: 1em;
+}
+
+.detailview__record_name {
+  padding-left: 1em;
+  color: rgba(255, 128, 128, 0.8);
 }

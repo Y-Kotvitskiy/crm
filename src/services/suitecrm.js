@@ -38,12 +38,14 @@ const crm = {
     return result.data.attributes;
   },
 
-  getList: async (module = `Accounts`) => {
+  getList: async (module = `Accounts`, sort = '') => {
     if (!crm.access_token) {
       await crm.getToken();
     }
 
-    const responce = await fetch(URL + `/V8/module/` + module, {
+    sort =  (sort) ? '?sort='+sort : `?sort=name`;
+
+    const responce = await fetch(URL + `/V8/module/` + module + sort, {
         method: `GET`,
         headers: {
           "Content-Type": "application/json",
