@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { detailView } from "./../../constants/crm";
 import { crm } from "./../../services/suitecrm";
+import ModuleField from "../ModuleField/ModuleField";
 
 const DetailView = () => {
   const { module, id } = useParams();
@@ -22,7 +23,6 @@ const DetailView = () => {
   useEffect(() => {
     if (record) {
       setFields(() =>
-
         detailView[module] && detailView[module].fields
           ? detailView[module].fields
           : Object.keys(record.attributes)
@@ -39,15 +39,13 @@ const DetailView = () => {
     <section className="detailview">
       <h2 className="detailview__title">{record.attributes[title]}</h2>
       <ul>
-        {fields.map((fieldName, index) => {
-          let value = record.attributes[fieldName];
-          return typeof value !== "object" && value ? (
-            <li className="detailview__field" key={index}>
-              <span className="detailview__field-title">{fieldName}:</span>
-              <span className="detailview__field-value">{value}</span>
-            </li>
-          ) : null;
-        })}
+        {fields.map((title) => (
+          <ModuleField
+            key={typeof title === `object` ? title.name : title}
+            title={title}
+            record={record.attributes}
+          />
+        ))}
       </ul>
     </section>
   ) : (
