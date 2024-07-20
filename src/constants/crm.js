@@ -1,4 +1,4 @@
-const modulesCollection = [`Accounts`, `Contacts`, `Calls`, `Employees`];
+const modulesCollection = [`Accounts`, `Contacts`, `Calls`, `AOS_Products`];
 
 const moduleList = {
   Accounts: {
