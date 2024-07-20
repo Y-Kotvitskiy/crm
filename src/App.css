@@ -20,6 +20,19 @@ ul {
   margin: 0 5px;
 }
 
+.modules-menu__login {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.modules-menu__exit {
+  border: none;
+  padding: 0 3px;
+  margin-left: 6px;
+  background-color: transparent;
+  color: rgba(255, 128, 128, 0.8);
+}
+
 .modules-menu a.active {
   text-decoration: underline;
 }
@@ -42,7 +55,7 @@ ul {
   width: 10em;
 }
 
-.module-list__images img{
+.module-list__images img {
   width: 100%;
 }
 
@@ -50,6 +63,11 @@ ul {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.module-list__buttons {
+  display: flex;
+  align-items: center;
 }
 
 .module-list__buttons button {
@@ -75,11 +93,9 @@ ul {
   display: flex;
 }
 
-
 .detailview__images img {
   width: 15em;
 }
-
 
 .module-field__field-value {
   display: inline-block;
@@ -115,4 +131,12 @@ ul {
 .detailview__record_name {
   padding-left: 1em;
   color: rgba(255, 128, 128, 0.8);
+}
+
+.login-form input {
+  font-size: 1.2em;
+}
+
+.login-form button {
+  margin: 0 5px;
 }

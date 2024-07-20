@@ -1,14 +1,19 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
 import { detailView } from "./../../constants/crm";
 import { crm } from "./../../services/suitecrm";
 import ModuleField from "../ModuleField/ModuleField";
+import { AuthContext } from "../../App";
+import { defaultModules } from "./../../constants/crm";
 
 const DetailView = () => {
   const { module, id } = useParams();
   const [record, setRecord] = useState(null);
   const [{ fields, images, attributes }, setFields]
     = useState({ fields: [], images: [], attributes: [] });
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     const getRecord = async () => {
@@ -38,6 +43,13 @@ const DetailView = () => {
       );
     }
   }, [record]);
+
+  useEffect(() => {
+    if (!user && !defaultModules.includes(module)) {
+      navigate(`/Login`);
+    }
+  }, [user]);
+
 
   const title =
     detailView[module] && detailView[module].title

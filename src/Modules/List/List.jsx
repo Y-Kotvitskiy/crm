@@ -1,14 +1,16 @@
 import ListRecord from "./ListRecord/ListRecord";
-import { moduleList } from "./../../constants/crm";
+import { moduleList, defaultModules} from "./../../constants/crm";
 import { crm } from "./../../services/suitecrm";
-
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { useParams,useNavigate } from "react-router-dom";
+import { AuthContext } from "../../App";
 
 export default function List() {
   const [list, setList] = useState(null);
   const [{fields, buttons}, setFields] = useState({fields:[], buttons: []});
   const { name } = useParams();
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getList = async () => {
@@ -17,6 +19,13 @@ export default function List() {
     };
     getList();
   }, [name]);
+
+  useEffect(()=> {
+    if (!user && !defaultModules.includes(name)) {
+      navigate(`/Login`)
+    }
+
+  }, [user])
 
   useEffect(() => {
     if (list && list.length > 0) {

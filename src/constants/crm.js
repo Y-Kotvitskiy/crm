@@ -1,4 +1,5 @@
 const modulesCollection = [`AOS_Products`, `Accounts`, `Contacts`, `Calls`];
+const defaultModules = [`AOS_Products`];
 
 const moduleList = {
   Accounts: {
@@ -14,7 +15,12 @@ const moduleList = {
     fields: [
       `first_name`,
       `last_name`,
-      { type: `link`, id: `account_id`, name: `account_name`, module: `Accounts` },
+      {
+        type: `link`,
+        id: `account_id`,
+        name: `account_name`,
+        module: `Accounts`,
+      },
       `phone_work`,
       `date_entered`,
     ],
@@ -23,7 +29,12 @@ const moduleList = {
   Calls: {
     fields: [
       `name`,
-      { type: `link`, id: `parent_id`, name: `parent_name`, module: `Accounts` },
+      {
+        type: `link`,
+        id: `parent_id`,
+        name: `parent_name`,
+        module: `Accounts`,
+      },
       `direction`,
       `date_entered`,
     ],
@@ -34,16 +45,16 @@ const moduleList = {
       { type: `image`, name: `product_image` },
       { type: `money`, name: `price` },
       `status_c`,
-      `description`
+      `description`,
     ],
     buttons: [
       {
         title: `Add to card`,
         clickHandler: (id, module) => {
-          console.log(`product id: `, id , `module` , module )
-        }
-      }
-    ]
+          console.log(`product id: `, id, `module`, module);
+        },
+      },
+    ],
   },
 };
 
@@ -63,20 +74,25 @@ const detailView = {
     fields: [
       `first_name`,
       `last_name`,
-      { type: `link`, id: `account_id`, name: `account_name`, module: `Accounts` },
+      {
+        type: `link`,
+        id: `account_id`,
+        name: `account_name`,
+        module: `Accounts`,
+      },
       `phone_work`,
       `date_entered`,
-      `description`
+      `description`,
     ],
   },
   Calls: {
     fields: [
       `direction`,
-      'status',
-      'date_start',
+      "status",
+      "date_start",
       { id: `parent_id`, name: `parent_name`, module: `Accounts` },
       `date_entered`,
-      `description`
+      `description`,
     ],
   },
   AOS_Products: {
@@ -86,8 +102,7 @@ const detailView = {
       `description`,
       `status_c`,
     ],
-
   },
 };
 
-export { modulesCollection, moduleList, detailView };
+export { modulesCollection, defaultModules, moduleList, detailView };
