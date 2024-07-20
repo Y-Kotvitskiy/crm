@@ -13,7 +13,7 @@ function App() {
       <Modules />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="Modules/:module/:id" element={<DetailView />} />
+        <Route path="Modules/:module/:id" element={<DetailView schrink = {false}/>} />
         <Route path="Modules/:name" element={<List />} />
       </Routes>
     </Router>

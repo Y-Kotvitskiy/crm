@@ -1,4 +1,4 @@
-const modulesCollection = [`Accounts`, `Contacts`, `Calls`, `AOS_Products`];
+const modulesCollection = [`AOS_Products`, `Accounts`, `Contacts`, `Calls`];
 
 const moduleList = {
   Accounts: {
@@ -14,7 +14,7 @@ const moduleList = {
     fields: [
       `first_name`,
       `last_name`,
-      { id: `account_id`, name: `account_name`, module: `Accounts` },
+      { type: `link`, id: `account_id`, name: `account_name`, module: `Accounts` },
       `phone_work`,
       `date_entered`,
     ],
@@ -23,11 +23,19 @@ const moduleList = {
   Calls: {
     fields: [
       `name`,
-      { id: `parent_id`, name: `parent_name`, module: `Accounts` },
+      { type: `link`, id: `parent_id`, name: `parent_name`, module: `Accounts` },
       `direction`,
       `date_entered`,
     ],
     sord: `name`,
+  },
+  AOS_Products: {
+    fields: [
+      { type: `image`, name: `product_image` },
+      { type: `money`, name: `price` },
+      `status_c`,
+      `description`
+    ],
   },
 };
 
@@ -47,7 +55,7 @@ const detailView = {
     fields: [
       `first_name`,
       `last_name`,
-      { id: `account_id`, name: `account_name`, module: `Accounts` },
+      { type: `link`, id: `account_id`, name: `account_name`, module: `Accounts` },
       `phone_work`,
       `date_entered`,
       `description`
@@ -61,6 +69,14 @@ const detailView = {
       { id: `parent_id`, name: `parent_name`, module: `Accounts` },
       `date_entered`,
       `description`
+    ],
+  },
+  AOS_Products: {
+    fields: [
+      { type: `image`, name: `product_image` },
+      { type: `money`, name: `price` },
+      `description`,
+      `status_c`,
     ],
   },
 };
