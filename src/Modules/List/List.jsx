@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 export default function List() {
   const [list, setList] = useState(null);
-  const [fields, setFields] = useState([]);
+  const [{fields, buttons}, setFields] = useState({fields:[], buttons: []});
   const { name } = useParams();
 
   useEffect(() => {
@@ -21,9 +21,13 @@ export default function List() {
   useEffect(() => {
     if (list && list.length > 0) {
       setFields(() => {
-        return moduleList[name] && moduleList[name].fields
+        const fields =  moduleList[name] && moduleList[name].fields
           ? moduleList[name].fields
           : Object.keys(list[0].attributes);
+          const buttons =  moduleList[name] && moduleList[name].buttons
+          ? moduleList[name].buttons
+          : [];
+          return {fields, buttons}
       });
     }
   }, [list]);
@@ -34,7 +38,7 @@ export default function List() {
     <ul className="module-list">
       {list.map((elem) => (
         <li key={elem.id}>
-          <ListRecord id={elem.id} record={elem.attributes} fields={fields} />
+          <ListRecord id={elem.id} record={elem.attributes} fields={fields} buttons = {buttons} module={name} />
         </li>
       ))}
     </ul>

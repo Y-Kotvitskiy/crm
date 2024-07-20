@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import ModuleField from "../../ModuleField/ModuleField";
 
-const ListRecord = ({ id, record, fields: fieldsProps, title = `name` }) => {
+const ListRecord = ({ id, record, fields: fieldsProps, title = `name`, buttons = [], module }) => {
 
   const fields = fieldsProps ? fieldsProps : Object.keys(record),
     images = fields.filter(field => (typeof field === `object` && field.type === `image`)),
@@ -13,7 +13,6 @@ const ListRecord = ({ id, record, fields: fieldsProps, title = `name` }) => {
         <NavLink to={id}>{record[title]}</NavLink>
       </h2>
       <div className="module-list__record">
-
         {images.length > 0 ?
           <div className="module-list__images">
             {images.map((title) => (
@@ -22,7 +21,6 @@ const ListRecord = ({ id, record, fields: fieldsProps, title = `name` }) => {
                 title={title}
                 record={record}
               />
-
             ))}
           </div> : null}
         <ul className="module-list__element-attibutes">
@@ -34,6 +32,17 @@ const ListRecord = ({ id, record, fields: fieldsProps, title = `name` }) => {
             />
           ))}
         </ul>
+        {buttons.length > 0 ?
+          <div className="module-list__buttons">
+            {buttons.map((button, index) => (
+              <p key={index}>
+                <button onClick={() => {
+                  button.clickHandler(id, module)
+                }} >{button.title}
+                </button></p>
+            ))}
+          </div> : null}
+
       </div>
     </div>
   );

@@ -39,7 +39,7 @@ ul {
 }
 
 .module-list__images {
-  width: 5em;
+  width: 10em;
 }
 
 .module-list__images img{
@@ -50,6 +50,10 @@ ul {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.module-list__buttons button {
+  font-size: 0.8em;
 }
 
 .module-field {

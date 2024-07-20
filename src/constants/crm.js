@@ -36,6 +36,14 @@ const moduleList = {
       `status_c`,
       `description`
     ],
+    buttons: [
+      {
+        title: `Add to card`,
+        clickHandler: (id, module) => {
+          console.log(`product id: `, id , `module` , module )
+        }
+      }
+    ]
   },
 };
 
@@ -78,6 +86,7 @@ const detailView = {
       `description`,
       `status_c`,
     ],
+
   },
 };
 

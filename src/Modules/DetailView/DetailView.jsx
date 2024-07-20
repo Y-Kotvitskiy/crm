@@ -53,16 +53,16 @@ const DetailView = () => {
         </span>
       </h2>
       {images.length > 0 ?
-          <div className="detailview__images">
-            {images.map((title) => (
-              <ModuleField
-                key={typeof title === `object` ? title.name : title}
-                title={title}
-                record={record.attributes}
-              />
+        <div className="detailview__images">
+          {images.map((title) => (
+            <ModuleField
+              key={typeof title === `object` ? title.name : title}
+              title={title}
+              record={record.attributes}
+            />
 
-            ))}
-          </div> : null}
+          ))}
+        </div> : null}
       {attributes.length > 0
         ? (
           <ul className="detailview__attibutes">
@@ -76,6 +76,10 @@ const DetailView = () => {
             ))}
           </ul>)
         : 0}
+      {images.length > 0 ?
+        <div className="detailview__buttons"></div> : null
+      }
+
     </section>
   ) : (
     "Loading"
