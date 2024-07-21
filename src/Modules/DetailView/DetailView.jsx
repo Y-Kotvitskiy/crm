@@ -8,21 +8,12 @@ import { defaultModules } from "./../../constants/crm";
 
 const DetailView = () => {
   const { module, id } = useParams();
-  const [record, setRecord] = useState(null);
+  const { data: record, isLoadint, error } = crm.useFetchRecord(module, id );  
+
   const [{ fields, images, attributes }, setFields]
     = useState({ fields: [], images: [], attributes: [] });
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  
-
-  useEffect(() => {
-    const getRecord = async () => {
-      const crmRecord = await crm.getRecod(module, id);
-      setRecord(crmRecord);
-    };
-
-    getRecord();
-  }, [module, id]);
 
   useEffect(() => {
     if (record) {
@@ -55,6 +46,15 @@ const DetailView = () => {
     detailView[module] && detailView[module].title
       ? detailView[module].title
       : detailView.defaultTitle;
+
+  if (isLoadint) {
+    return <p>{module} record data is loading ..</p>; 
+  }
+
+  if (error) {
+    console.error(error);
+    return <p> Failed fetch modules .. </p>
+  }  
 
   return record && fields.length > 0 ? (
     <section className="detailview">
