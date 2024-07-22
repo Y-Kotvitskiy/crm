@@ -1,6 +1,6 @@
 import ListRecord from "./ListRecord/ListRecord";
 import { moduleList, defaultModules } from "./../../constants/crm";
-import { crm } from "./../../services/suitecrm";
+import useFetchList from "../../hooks/useFetchList";
 import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
@@ -13,7 +13,7 @@ export default function List() {
   });
   const { name } = useParams();
   const { user } = useContext(AuthContext);
-  const { data: list, isLoadint, error } = crm.useFetchList(name);
+  const { data: list, isLoadint, error } = useFetchList(name);
 
   const navigate = useNavigate();
 

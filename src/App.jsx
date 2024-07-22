@@ -1,11 +1,11 @@
 import { useState, createContext, useEffect } from "react";
 import "./App.css";
-import Modules from "./Modules/Modules";
-import List from "./Modules/List/List";
-import DetailView from "./Modules/DetailView/DetailView";
+import Modules from "./components/Modules/Modules";
+import List from "./components/List/List"
+import DetailView from "./components/DetailView/DetailView";
 import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
-import Home from "./Home/Home";
-import Login from "./Login/Login";
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
 
 export const AuthContext = createContext();
  

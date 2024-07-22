@@ -1,7 +1,7 @@
-import { AuthContext } from "../App";
+import { AuthContext } from "../../App";
 import { useRef, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { defaultModules } from "../constants/crm";
+import { defaultModules } from "../../constants/crm";
 
 const Login = () => {
   const { setAuth } = useContext(AuthContext),

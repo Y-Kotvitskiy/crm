@@ -89,8 +89,13 @@ const detailView = {
     fields: [
       `direction`,
       "status",
+      {
+        type: `link`,
+        id: `parent_id`,
+        name: `parent_name`,
+        module: `Accounts`,
+      },
       "date_start",
-      { id: `parent_id`, name: `parent_name`, module: `Accounts` },
       `date_entered`,
       `description`,
     ],

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState, useCallback } from "react";
 import { NavLink } from "react-router-dom";
-import { crm } from "./../services/suitecrm";
-import { modulesCollection, defaultModules } from "../constants/crm";
-import { AuthContext } from "../App";
+import useFetchModules from "../../hooks/useFetchModules";
+import { modulesCollection, defaultModules } from "../../constants/crm"
+import { AuthContext } from "../../App";
 
 export default function Modules() {
-  const { data: modules, isLoadint, error } = crm.useFetchModules();
+  const { data: modules, isLoadint, error } = useFetchModules();
 
   const [titles, setTitles] = useState([]);
   const { user, setAuth } = useContext(AuthContext);

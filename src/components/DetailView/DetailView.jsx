@@ -1,14 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { detailView } from "./../../constants/crm";
-import { crm } from "./../../services/suitecrm";
+import useFetchRecord from "../../hooks/useFetchRecord" 
 import ModuleField from "../ModuleField/ModuleField";
 import { AuthContext } from "../../App";
 import { defaultModules } from "./../../constants/crm";
 
 const DetailView = () => {
   const { module, id } = useParams();
-  const { data: record, isLoadint, error } = crm.useFetchRecord(module, id );  
+  const { data: record, isLoadint, error } = useFetchRecord(module, id );  
 
   const [{ fields, images, attributes }, setFields]
     = useState({ fields: [], images: [], attributes: [] });

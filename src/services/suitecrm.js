@@ -52,37 +52,6 @@ const crm = {
     const result = await responce.json();
     return result.data;
   },
-
-  useFetchData: (url) => {
-    const [data, setData] = useState(null);
-    const [isLoadint, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-
-    const getData = useCallback(async () => {
-      try {
-        setLoading(true);
-        const data = await crm.fetchData(url);
-        setData(data);
-      } catch (e) {
-        setError(e);
-      } finally {
-        setLoading(false);
-      }
-    }, [url]);
-
-    useEffect(() => {
-      getData();
-    }, [getData]);
-
-    return { data, isLoadint, error, getData };
-  },
-
-  useFetchModules: () => crm.useFetchData(crm.getModulesUrl()),
-
-  useFetchList: (module) => crm.useFetchData(crm.getLitsUrl(module)),
-
-  useFetchRecord: (module, id) =>
-    crm.useFetchData(crm.getRecordUrl(module, id)),
 };
 
 export { crm };
