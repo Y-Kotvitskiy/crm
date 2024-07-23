@@ -1,0 +1,21 @@
+.list-cart {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.list-cart__incriment {
+  width: 2em;
+  font-size: 1em;
+  margin: 0 0.5em;
+}
+
+.list-cart__count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 1.5em;
+}
+
+.list-cart__add,.list-cart__delete{
+  width: 7em;
+}

@@ -43,17 +43,12 @@ const moduleList = {
   AOS_Products: {
     fields: [
       { type: `image`, name: `product_image` },
-      { type: `money`, name: `price` },
       `status_c`,
+      { type: `money`, name: `price` },
       `description`,
     ],
     buttons: [
-      {
-        title: `Add to card`,
-        clickHandler: (id, module) => {
-          console.log(`product id: `, id, `module`, module);
-        },
-      },
+      {type: `list_cart`}
     ],
   },
 };

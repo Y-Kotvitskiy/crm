@@ -14,6 +14,7 @@ ul {
   display: flex;
   flex-wrap: wrap;
   font-size: 1.5em;
+  min-width: 530px;
 }
 
 .modules-menu li {
@@ -35,11 +36,13 @@ ul {
 
 .modules-menu a.active {
   text-decoration: underline;
+  min-width: 530px;
 }
 
 .module-list__element-title {
   text-align: left;
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  min-width: 530px;
 }
 
 .module-list__element-title a {
@@ -49,6 +52,8 @@ ul {
 
 .module-list__record {
   display: flex;
+  justify-content: space-around;  
+  min-width: 530px;
 }
 
 .module-list__images {
@@ -56,30 +61,37 @@ ul {
 }
 
 .module-list__images img {
-  width: 100%;
+  width: 150px;
 }
 
 .module-list__element-attibutes {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  min-width: 200px;
 }
 
 .module-list__buttons {
+  width: 100%;
+  max-width: 20em;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
-.module-list__buttons button {
+
+.module-list__button {
   font-size: 0.8em;
 }
 
 .module-field {
+  text-align: left;
   margin: 2px 5px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .module-field__title {
+  text-align: left;
   font-weight: 100;
   padding: 0 5px;
   color: rgba(255, 255, 255, 0.7);
