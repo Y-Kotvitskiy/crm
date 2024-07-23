@@ -6,6 +6,7 @@ import DetailView from "./components/DetailView/DetailView";
 import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import ProductList from "./pages/ProductList/ProductList"; 
 
 export const AuthContext = createContext();
  
@@ -19,10 +20,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="Modules/:module/:id" element={<List />} />
           <Route
             path="Modules/:module/:id"
             element={<DetailView schrink={false} />}
           />
+          {/* <Route path="Modules/AOS_Products" element={<ProductList  name={`AOS_Products`}/>} /> */}
           <Route path="Modules/:name" element={<List />} />
         </Routes>
       </AuthContext.Provider>
