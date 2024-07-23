@@ -1,7 +1,10 @@
-import { useReducer } from "react";
+import { useReducer, useContext, useEffect } from "react";
 import "./ListCart.css";
+import ProductCardContext from "../../../../contexts/ProductCardContext";
 
-const ListCart = () => {
+const ListCart = ({id}) => {
+  const {productCard, setProductCard} = useContext(ProductCardContext);
+
   const reducer = (state, action) => {
     switch (action.type) {
       case `Increment`:
@@ -15,7 +18,15 @@ const ListCart = () => {
     }
   };
 
-  const [productAmount, dispatch] = useReducer(reducer, 0);
+  const [productAmount, dispatch] = useReducer(reducer, productCard[id] || 0);
+
+  useEffect (() => {
+    if (productAmount !==0) {
+      productCard[id] =  productAmount
+    } else {
+      delete productCard[id]
+    }
+  }, [productAmount])
 
   return (
     <section className="list-cart">

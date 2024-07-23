@@ -48,7 +48,7 @@ const ListRecord = ({
           <div className="module-list__buttons">
             {buttons.map((button, index) =>
               button.type && button.type === `list_cart` ? (
-                <ListCart key={index} />
+                <ListCart key={index} id={id} />
               ) : (
                 <p key={index}>
                   <button
