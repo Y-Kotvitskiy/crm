@@ -49,10 +49,7 @@ const moduleList = {
     ],
     buttons: [
       {
-        title: `Add to card`,
-        clickHandler: (id, module) => {
-          console.log(`product id: `, id, `module`, module);
-        },
+        type:`list_cart`,
       },
     ],
   },

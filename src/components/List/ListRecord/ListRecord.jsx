@@ -1,11 +1,24 @@
 import { NavLink } from "react-router-dom";
 import ModuleField from "../../ModuleField/ModuleField";
+import ListCart from "./ListCart/ListCart";
 
-const ListRecord = ({ id, record, fields: fieldsProps, title = `name`, buttons = [], module }) => {
+const ListRecord = ({
+  id,
+  record,
+  fields: fieldsProps,
+  title = `name`,
+  buttons = [],
+  module,
+}) => {
+  console.log(buttons);
 
   const fields = fieldsProps ? fieldsProps : Object.keys(record),
-    images = fields.filter(field => (typeof field === `object` && field.type === `image`)),
-    attributes = fields.filter(field => (typeof field != `object` || field.type !== `image`));
+    images = fields.filter(
+      (field) => typeof field === `object` && field.type === `image`
+    ),
+    attributes = fields.filter(
+      (field) => typeof field != `object` || field.type !== `image`
+    );
 
   return (
     <div className="module-list__element">
@@ -13,7 +26,7 @@ const ListRecord = ({ id, record, fields: fieldsProps, title = `name`, buttons =
         <NavLink to={id}>{record[title]}</NavLink>
       </h2>
       <div className="module-list__record">
-        {images.length > 0 ?
+        {images.length > 0 ? (
           <div className="module-list__images">
             {images.map((title) => (
               <ModuleField
@@ -22,7 +35,8 @@ const ListRecord = ({ id, record, fields: fieldsProps, title = `name`, buttons =
                 record={record}
               />
             ))}
-          </div> : null}
+          </div>
+        ) : null}
         <ul className="module-list__element-attibutes">
           {attributes.map((title) => (
             <ModuleField
@@ -32,17 +46,25 @@ const ListRecord = ({ id, record, fields: fieldsProps, title = `name`, buttons =
             />
           ))}
         </ul>
-        {buttons.length > 0 ?
+        {buttons.length > 0 ? (
           <div className="module-list__buttons">
-            {buttons.map((button, index) => (
-              <p key={index}>
-                <button onClick={() => {
-                  button.clickHandler(id, module)
-                }} >{button.title}
-                </button></p>
-            ))}
-          </div> : null}
-
+            {buttons.map((button, index) =>
+              button.type && button.type === `list_cart` ? (
+                <ListCart />
+              ) : (
+                <p key={index}>
+                  <button
+                    onClick={() => {
+                      button.clickHandler(id, module);
+                    }}
+                  >
+                    {button.title}
+                  </button>
+                </p>
+              )
+            )}
+          </div>
+        ) : null}
       </div>
     </div>
   );
