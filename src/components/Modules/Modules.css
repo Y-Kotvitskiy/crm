@@ -1,0 +1,51 @@
+.modules-menu {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.5em;
+  min-width: 530px;
+}
+
+.modules-menu li {
+  margin: 0 5px;
+}
+
+.modules-menu__login {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.modules-menu__exit {
+  border: none;
+  padding: 0 3px;
+  margin-left: 6px;
+  background-color: transparent;
+  color: rgba(255, 128, 128, 0.8);
+}
+
+.modules-menu a.active {
+  text-decoration: underline;
+  min-width: 530px;
+}
+
+.modules-menu__card {
+  width: 4em;
+}
+
+.modules-menu__card_link {
+  color: rgba(255, 128, 128, 0.8);
+  border: solid rgba(255, 128, 128, 0.8) 1px;
+  border-radius: 25% / 50%;
+  padding: 3px;
+}
+.modules-menu__card a.active {
+  padding: 10px 15px;
+  border-radius: 30% / 50%;
+  background-color: rgba(255, 128, 128, 0.1);
+  text-decoration: none;
+}
+
+@media (max-width: 960px) {
+  .modules-menu {
+    font-size: 1.2em;
+  }
+}

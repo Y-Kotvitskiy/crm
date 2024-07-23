@@ -6,8 +6,10 @@ import DetailView from "./components/DetailView/DetailView";
 import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
-import {ProductCardProvider} from "./contexts/ProductCardContext";
-
+import { ProductCardProvider } from "./contexts/ProductCardContext";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import Cart from "./pages/Cart/Cart";
 export const AuthContext = createContext();
 
 function App() {
@@ -15,11 +17,12 @@ function App() {
 
   return (
     <Router>
-      <ProductCardProvider>
+      <Provider store={store}>
         <AuthContext.Provider value={{ user, setAuth }}>
           <Modules />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/Cart" element={<Cart />} />
             <Route path="/Login" element={<Login />} />
             <Route
               path="Modules/:module/:id"
@@ -28,7 +31,7 @@ function App() {
             <Route path="Modules/:name" element={<List />} />
           </Routes>
         </AuthContext.Provider>
-      </ProductCardProvider>
+      </Provider>
     </Router>
   );
 }

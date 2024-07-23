@@ -1,56 +1,36 @@
-import { useReducer, useContext, useEffect, useCallback } from "react";
 import "./ListCart.css";
-import ProductCardContext from "../../../../contexts/ProductCardContext";
+import {
+  increment,
+  decrement,
+  deleteItem,
+} from "../../../../redux/slices/productCartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
-const ListCart = ({ id }) => {
-  const { productCard, setProductCard } = useContext(ProductCardContext);
+const ListCart = ({ id, title = `pizza` }) => {
+  const cardItem = useSelector((state) => state.productCart.items[id]);
 
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case `Increment`:
-        return ++state;
-      case `Decrement`:
-        return --state;
-      case `Delete`:
-        return 0;
-      default:
-        return state;
-    }
-  };
-
-  const [productAmount, dispatch] = useReducer(
-    reducer,
-    productCard && productCard[id] ? productCard[id] : 0
-  );
-
-  useEffect(() => {
-    setProductCard((prevCard) => {
-      const newCard = { ...prevCard, [id]: productAmount };
-      if (!productAmount) delete newCard[id];
-      return newCard;
-    });
-  }, [productAmount]);
+  const dispatch = useDispatch();
 
   return (
     <section className="list-cart">
-      {productAmount ? (
+      {cardItem ? (
         <>
           <button
             className="list-cart__incriment"
-            onClick={() => dispatch({ type: `Decrement` })}
+            onClick={() => dispatch(decrement({ id, title }))}
           >
             -
           </button>
-          <span className="list-cart__count">{productAmount}</span>
+          <span className="list-cart__count">{cardItem.qty}</span>
           <button
             className="list-cart__incriment"
-            onClick={() => dispatch({ type: `Increment` })}
+            onClick={() => dispatch(increment({ id, title }))}
           >
             +
           </button>
           <button
             className="list-cart__delete"
-            onClick={() => dispatch({ type: `Delete` })}
+            onClick={() => dispatch(deleteItem({ id, title }))}
           >
             Delete
           </button>
@@ -58,7 +38,7 @@ const ListCart = ({ id }) => {
       ) : (
         <button
           className="list-cart__add"
-          onClick={() => dispatch({ type: `Increment` })}
+          onClick={() => dispatch(increment({ id, title }))}
         >
           Add to card
         </button>

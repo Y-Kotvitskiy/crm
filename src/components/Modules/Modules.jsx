@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState, useCallback } from "react";
 import { NavLink } from "react-router-dom";
 import useFetchModules from "../../hooks/useFetchModules";
-import { modulesCollection, defaultModules } from "../../constants/crm"
+import { modulesCollection, defaultModules } from "../../constants/crm";
 import { AuthContext } from "../../App";
+import { useSelector } from "react-redux";
+import "./Modules.css";
 
 export default function Modules() {
   const { data: modules, isLoadint, error } = useFetchModules();
@@ -18,6 +20,8 @@ export default function Modules() {
       .filter((title) => user || defaultModules.includes(title));
   });
 
+  const cardItem = useSelector((state) => state.productCart.total);
+
   useEffect(() => {
     setTitles(getTitles(modules));
   }, [modules]);
@@ -32,7 +36,7 @@ export default function Modules() {
   }
   if (error) {
     console.error(error);
-    return <p> Failed fetch modules .. </p>
+    return <p> Failed fetch modules .. </p>;
   }
 
   return (
@@ -59,6 +63,13 @@ export default function Modules() {
           ) : (
             <NavLink to="/Login">Login</NavLink>
           )}
+        </li>
+        <li className="modules-menu__card">
+          {cardItem ? (
+            <NavLink to="/Cart">
+              🛒<span className="modules-menu__card_link">{cardItem}</span>
+            </NavLink>
+          ) : null}
         </li>
       </ul>
     </nav>

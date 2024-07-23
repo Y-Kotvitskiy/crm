@@ -10,34 +10,6 @@ ul {
   list-style-type: none;
 }
 
-.modules-menu {
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 1.5em;
-  min-width: 530px;
-}
-
-.modules-menu li {
-  margin: 0 5px;
-}
-
-.modules-menu__login {
-  flex-grow: 1;
-  text-align: right;
-}
-
-.modules-menu__exit {
-  border: none;
-  padding: 0 3px;
-  margin-left: 6px;
-  background-color: transparent;
-  color: rgba(255, 128, 128, 0.8);
-}
-
-.modules-menu a.active {
-  text-decoration: underline;
-  min-width: 530px;
-}
 
 .module-list__element-title {
   text-align: left;

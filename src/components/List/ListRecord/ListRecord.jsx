@@ -10,7 +10,6 @@ const ListRecord = ({
   buttons = [],
   module,
 }) => {
-
   const fields = fieldsProps ? fieldsProps : Object.keys(record),
     images = fields.filter(
       (field) => typeof field === `object` && field.type === `image`
