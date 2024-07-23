@@ -1,9 +1,9 @@
-import { useReducer, useContext, useEffect } from "react";
+import { useReducer, useContext, useEffect, useCallback } from "react";
 import "./ListCart.css";
 import ProductCardContext from "../../../../contexts/ProductCardContext";
 
-const ListCart = ({id}) => {
-  const {productCard, setProductCard} = useContext(ProductCardContext);
+const ListCart = ({ id }) => {
+  const { productCard, setProductCard } = useContext(ProductCardContext);
 
   const reducer = (state, action) => {
     switch (action.type) {
@@ -18,15 +18,18 @@ const ListCart = ({id}) => {
     }
   };
 
-  const [productAmount, dispatch] = useReducer(reducer, productCard[id] || 0);
+  const [productAmount, dispatch] = useReducer(
+    reducer,
+    productCard && productCard[id] ? productCard[id] : 0
+  );
 
-  useEffect (() => {
-    if (productAmount !==0) {
-      productCard[id] =  productAmount
-    } else {
-      delete productCard[id]
-    }
-  }, [productAmount])
+  useEffect(() => {
+    setProductCard((prevCard) => {
+      const newCard = { ...prevCard, [id]: productAmount };
+      if (!productAmount) delete newCard[id];
+      return newCard;
+    });
+  }, [productAmount]);
 
   return (
     <section className="list-cart">
