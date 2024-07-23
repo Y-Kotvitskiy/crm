@@ -6,14 +6,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
 
 export default function List() {
-
   const [{ fields, buttons }, setFields] = useState({
     fields: [],
     buttons: [],
   });
   const { name } = useParams();
   const { user } = useContext(AuthContext);
-  const { data: list, isLoadint, error } = useFetchList(name);
+  const { data: list, isLoadint, error, getData } = useFetchList(name);
 
   const navigate = useNavigate();
 
@@ -40,29 +39,32 @@ export default function List() {
   }, [list]);
 
   if (isLoadint) {
-    return <p>{name} is loading ..</p>
+    return <p>{name} is loading ..</p>;
   }
 
   if (error) {
     console.error(error);
-    return <p> Failed fetch modules .. </p>
+    return <p> Failed fetch modules .. </p>;
   }
-  
+
   return !list ? (
     `Data loading`
   ) : list.length > 0 && fields.length > 0 ? (
-    <ul className="module-list">
-      {list.map((elem) => (
-        <li key={elem.id}>
-          <ListRecord
-            id={elem.id}
-            record={elem.attributes}
-            fields={fields}
-            buttons={buttons}
-            module={name}
-          />
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className="module-list">
+        {list.map((elem) => (
+          <li key={elem.id}>
+            <ListRecord
+              id={elem.id}
+              record={elem.attributes}
+              fields={fields}
+              buttons={buttons}
+              module={name}
+            />
+          </li>
+        ))}
+      </ul>
+      <button onClick={getData}>🗘</button>
+    </>
   ) : null;
 }
