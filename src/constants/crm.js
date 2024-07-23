@@ -43,14 +43,12 @@ const moduleList = {
   AOS_Products: {
     fields: [
       { type: `image`, name: `product_image` },
-      { type: `money`, name: `price` },
       `status_c`,
+      { type: `money`, name: `price` },
       `description`,
     ],
     buttons: [
-      {
-        type:`list_cart`,
-      },
+      {type: `list_cart`}
     ],
   },
 };

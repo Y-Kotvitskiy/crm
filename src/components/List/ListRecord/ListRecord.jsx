@@ -10,7 +10,6 @@ const ListRecord = ({
   buttons = [],
   module,
 }) => {
-  console.log(buttons);
 
   const fields = fieldsProps ? fieldsProps : Object.keys(record),
     images = fields.filter(
@@ -50,7 +49,7 @@ const ListRecord = ({
           <div className="module-list__buttons">
             {buttons.map((button, index) =>
               button.type && button.type === `list_cart` ? (
-                <ListCart />
+                <ListCart key={index} id={id} />
               ) : (
                 <p key={index}>
                   <button
