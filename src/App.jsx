@@ -20,12 +20,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="Modules/:module/:id" element={<List />} />
           <Route
             path="Modules/:module/:id"
             element={<DetailView schrink={false} />}
           />
-          {/* <Route path="Modules/AOS_Products" element={<ProductList  name={`AOS_Products`}/>} /> */}
           <Route path="Modules/:name" element={<List />} />
         </Routes>
       </AuthContext.Provider>
