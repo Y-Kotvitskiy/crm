@@ -56,19 +56,6 @@ ul {
   font-size: 0.8em;
 }
 
-.module-field {
-  text-align: left;
-  margin: 2px 5px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.module-field__title {
-  text-align: left;
-  font-weight: 100;
-  padding: 0 5px;
-  color: rgba(255, 255, 255, 0.7);
-}
-
 .detailview {
   padding-left: 40px;
 }

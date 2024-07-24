@@ -1,0 +1,16 @@
+.module-field {
+    text-align: left;
+    margin: 2px 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .module-field__title {
+    display: inline-block;
+    text-align: left;
+    font-weight: 100;
+    padding: 0 5px;
+    color: rgba(255, 255, 255, 0.7);
+    min-width: 4em;
+  }
+
+  

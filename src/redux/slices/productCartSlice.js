@@ -1,10 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const calcTotal = (items) =>
-  Object.keys(items).reduce(
+const calcTotal = (state) => {
+  const items = state.items;
+  state.totalCount = Object.keys(items).reduce(
     (accumulator, currentId) => accumulator + items[currentId].qty,
     0
   );
+  state.totalSum = Object.keys(items).reduce(
+    (accumulator, currentId) =>
+      accumulator + items[currentId].qty * items[currentId].pizza.price,
+    0
+  );
+};
 
 const initialState = {
   items: {},
@@ -14,20 +21,20 @@ export const productCardSlice = createSlice({
   name: "productCard",
   initialState,
   reducers: {
-    increment: (state, { payload: { id, title } }) => {
-    const items = state.items; 
+    increment: (state, { payload: { id, pizza } }) => {
+      const items = state.items;
       items[id] = items[id]
-        ? {...items[id], qty : items[id].qty + 1}  
-        : { title, qty: 1 };
-      state.total = calcTotal(state.items);
+        ? { ...items[id], qty: items[id].qty + 1 }
+        : { pizza, qty: 1 };
+      calcTotal(state);
     },
     decrement: (state, { payload: { id } }) => {
       if (state.items[id]) state.items[id] -= 1;
-      state.total = calcTotal(state.items);
+      calcTotal(state);
     },
     deleteItem: (state, { payload: { id } }) => {
       if (state.items[id]) delete state.items[id];
-      state.total = calcTotal(state.items);
+      calcTotal(state);
     },
   },
 });

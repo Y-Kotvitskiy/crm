@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { showPriceAmount, shrinkFieldValue } from "../../utils/utils"
+import "./ModuleField.css"
 
 const ModuleField = ({ title: titleProps, record, schrink = true }) => {
 

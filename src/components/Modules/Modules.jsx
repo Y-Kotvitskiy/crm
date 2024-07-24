@@ -20,7 +20,7 @@ export default function Modules() {
       .filter((title) => user || defaultModules.includes(title));
   });
 
-  const cardItem = useSelector((state) => state.productCart.total);
+  const cardItem = useSelector((state) => state.productCart.totalCount);
 
   useEffect(() => {
     setTitles(getTitles(modules));

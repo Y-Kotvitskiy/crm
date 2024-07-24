@@ -6,7 +6,7 @@ import {
 } from "../../../../redux/slices/productCartSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const ListCart = ({ id, title = `pizza` }) => {
+const ListCart = ({ id, record:pizza }) => {
   const cardItem = useSelector((state) => state.productCart.items[id]);
 
   const dispatch = useDispatch();
@@ -17,20 +17,20 @@ const ListCart = ({ id, title = `pizza` }) => {
         <>
           <button
             className="list-cart__incriment"
-            onClick={() => dispatch(decrement({ id, title }))}
+            onClick={() => dispatch(decrement({ id, pizza }))}
           >
             -
           </button>
           <span className="list-cart__count">{cardItem.qty}</span>
           <button
             className="list-cart__incriment"
-            onClick={() => dispatch(increment({ id, title }))}
+            onClick={() => dispatch(increment({ id, pizza }))}
           >
             +
           </button>
           <button
             className="list-cart__delete"
-            onClick={() => dispatch(deleteItem({ id, title }))}
+            onClick={() => dispatch(deleteItem({ id, pizza }))}
           >
             Delete
           </button>
@@ -38,7 +38,7 @@ const ListCart = ({ id, title = `pizza` }) => {
       ) : (
         <button
           className="list-cart__add"
-          onClick={() => dispatch(increment({ id, title }))}
+          onClick={() => dispatch(increment({ id, pizza }))}
         >
           Add to card
         </button>
