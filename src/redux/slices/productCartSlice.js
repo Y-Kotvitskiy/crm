@@ -29,7 +29,11 @@ export const productCardSlice = createSlice({
       calcTotal(state);
     },
     decrement: (state, { payload: { id } }) => {
-      if (state.items[id]) state.items[id] -= 1;
+      if (state.items[id].qty === 1) {
+        delete state.items[id];
+      } else {
+        state.items[id].qty -= 1;
+      }
       calcTotal(state);
     },
     deleteItem: (state, { payload: { id } }) => {
