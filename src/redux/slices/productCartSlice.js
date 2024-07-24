@@ -40,9 +40,13 @@ export const productCardSlice = createSlice({
       if (state.items[id]) delete state.items[id];
       calcTotal(state);
     },
+    clearCard(state) {
+      state.items = {};
+      calcTotal(state);
+    },
   },
 });
 
-export const { increment, decrement, deleteItem } = productCardSlice.actions;
+export const { increment, decrement, deleteItem, clearCard } = productCardSlice.actions;
 
 export default productCardSlice.reducer;
