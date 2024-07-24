@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 const URL = "http://45.82.177.129:8080/Api",
-//const URL = "https://45.82.177.129:8443/Api",
+  //const URL = "https://45.82.177.129:8443/Api",
   client_id = `64f2ab0d-d60f-ab9d-f451-6692662970e0`,
   client_secret = `api_user`;
 
@@ -26,6 +26,43 @@ const crm = {
     }
     const result = await request.json();
     crm.access_token = await result.access_token;
+  },
+
+  createInvoice: async () => {
+    if (!crm.access_token) {
+      await crm.getToken();
+    }
+
+    let pizza = [
+      { p: 1, name: `pizza` },
+      { p: 2, name: `pizza` },
+    ];
+
+    pizza = JSON.stringify(pizza);
+
+    const request = await fetch(URL + `/V8/module`, {
+      method: `POST`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + crm.access_token,
+      },
+      body: JSON.stringify({
+        data: {
+          type: "AOS_Invoices",
+          attributes: {
+            name: "Test account",
+            description: pizza,
+          },
+        },
+      }),
+    });
+
+    if (!request.ok) {
+      throw Error(`Failed get access token`);
+    }
+
+    const result = await request.json();
+    return result;
   },
 
   getModulesUrl: () => URL + `/V8/meta/modules`,

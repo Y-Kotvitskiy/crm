@@ -1,0 +1,26 @@
+.new-order__fiedset {
+  display: flex;
+  flex-direction: column;
+  margin: 1em auto;
+}
+
+.new-order__field {
+  display: flex;
+  margin: 0.5em;
+}
+
+.new-order__field label,
+.new-order__field input {
+  flex-grow: 1;
+  flex-basis: 0;
+  padding: 0 1em;
+}
+
+.new-order__field label{
+    text-align: right;
+}
+
+.new-order__field input {
+    font-size: 1em;
+    padding: 0.2em 1em;
+}

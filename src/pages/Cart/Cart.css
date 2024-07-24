@@ -38,4 +38,6 @@
 
 .cart__order_button, .cart__clear_button {
     margin: 0 2em;
+    padding: .5em 2em;
+    border: 1px solid rgba(255, 255, 0, 0.4);
 }

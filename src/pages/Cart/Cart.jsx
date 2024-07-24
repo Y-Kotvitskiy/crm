@@ -52,8 +52,18 @@ const Cart = () => {
         </div>
       ))}
       <div className="cart__footer_buttons">
-        <button className="cart__order_button">ORDER PIZZAS</button>
-        <button className="cart__clear_button" onClick={() => dispatch(clearCard())}>CLEAR CARD</button>
+        <button
+          className="cart__order_button"
+          onClick={() => navigate(`/Modules/AOS_Invoices/New`)}
+        >
+          ORDER PIZZAS
+        </button>
+        <button
+          className="cart__clear_button"
+          onClick={() => dispatch(clearCard())}
+        >
+          CLEAR CARD
+        </button>
       </div>
     </section>
   );

@@ -1,7 +1,10 @@
-const modulesCollection = [`AOS_Products`, `Accounts`, `Contacts`, `Calls`];
+const modulesCollection = [`AOS_Products`, `AOS_Invoices`, `Contacts`, `Calls`];
 const defaultModules = [`AOS_Products`];
 
 const moduleList = {
+  AOS_Invoices: {
+    fields: [`number`, `name`, `status`, `phone_c`, `description`],
+  },
   Accounts: {
     fields: [
       `phone_office`,
@@ -47,14 +50,15 @@ const moduleList = {
       { type: `money`, name: `price` },
       `description`,
     ],
-    buttons: [
-      {type: `list_cart`}
-    ],
+    buttons: [{ type: `list_cart` }],
   },
 };
 
 const detailView = {
   defaultTitle: `name`,
+  AOS_Invoices: {
+    fields: [`number`, `name`, `status`, `phone_c`, `description`],
+  },
   Accounts: {
     fields: [
       `name`,
