@@ -48,7 +48,37 @@ const crm = {
     });
 
     if (!request.ok) {
-      throw Error(`Failed get access token`);
+      throw Error(`Failed to post order`);
+    }
+
+    const result = await request.json();
+    return result;
+  },
+
+  updateInvoice: async (id, attributes) => {
+    if (!crm.access_token) {
+      await crm.getToken();
+    }
+
+    const body = JSON.stringify({
+      data: {
+        type: "AOS_Invoices",
+        id,
+        attributes,
+      },
+    });
+
+    const request = await fetch(URL + `/V8/module`, {
+      method: `PATCH`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + crm.access_token,
+      },
+      body: body,
+    });
+
+    if (!request.ok) {
+      throw Error(`Failed to patch order`);
     }
 
     const result = await request.json();

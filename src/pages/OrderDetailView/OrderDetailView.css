@@ -1,24 +1,89 @@
 .orderview__title {
-    display: flex;
-    /* width: 60%; */
-    margin: 0 auto;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0 1em;
-    background-color: rgba(255, 128, 128, 0.1);
-  }
- 
+  display: flex;
+  margin: 1em auto;
+  padding: 0.5em 0;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(255, 128, 128, 0.1);
+}
+
+.orderview__title_text {
+  width: 100%;
+  text-align: left;
+  padding-left: 2em;
+}
+
+.orderview__title_properties {
+  display: flex;
+  align-items: center;
+}
+
+.orderview__preparing,
+.orderview__priority {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 0 0.5em;
+  white-space: nowrap;
+}
+
 .orderview__preparing {
-    font-size: 0.8rem;
-    background-color: green;
-    padding: 5px 10px;
-    border-radius: 5px;
-}  
+  background-color: green;
+}
+
+.orderview__priority {
+  background-color: red;
+}
 
 .orderview .card__attributes {
-    width: 100%;
+  width: 100%;
 }
-.orderview  .card_price {
-    width: 100%;
-    text-align: right;
+.orderview .card_price {
+  width: 100%;
+  text-align: right;
+}
+
+
+.orderview__footer, .orderview__time {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5em 1em;
+  border-radius: 1em;
+  text-align: left;
+  width: 60%;
+  min-width: 35em;
+  margin: 0 auto;
+}
+
+
+.orderview__time {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.orderview__footer_total {
+  font-weight: bold;
+}
+
+.orderview__footer_buton{
+  width: 60%;
+  min-width: 35em;
+  margin: 2em auto;
+  text-align: right;
+}
+
+.orderview__prioritize_buton{
+  margin-right: -1em;
+  padding: 0.5em 2em;
+  border: 1px solid rgba(255, 255, 0, 0.4);
+}
+
+.new-order__api_error {
+  color: red;
+  margin-top: -1em;
+  visibility: hidden;
+}
+
+.new-order__api_error.api_error{
+  visibility: visible;
 }

@@ -4,7 +4,7 @@ const defaultListSort = `name`;
 
 const moduleList = {
   AOS_Invoices: {
-    fields: [`number`, `name`, `status`, `phone_c`, `description`],
+    fields: [`number`, `name`, `status`, `phone_c`, `priority_c`, `total_amt`],
     sort: `-number`,
   },
   Accounts: {
@@ -60,7 +60,7 @@ const detailView = {
   defaultTitle: `name`,
   AOS_Invoices: {
     title: `number`,
-    fields: [ `name`, `status`, `phone_c`, `description`],
+    fields: [`name`, `status`, `phone_c`, `description`],
   },
   Accounts: {
     fields: [
@@ -112,6 +112,8 @@ const detailView = {
   },
 };
 
+const prioritySum = 8;
+
 export {
   modulesCollection,
   defaultModules,
@@ -119,3 +121,5 @@ export {
   moduleList,
   detailView,
 };
+
+export { prioritySum };

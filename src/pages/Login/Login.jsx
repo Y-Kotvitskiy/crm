@@ -28,11 +28,7 @@ const Login = () => {
       <fieldset>
         <label>
           Enter login name
-          <input
-            ref={inputRef}
-            onChange={handleInput}
-            placeholder="login"
-          />
+          <input ref={inputRef} onChange={handleInput} placeholder="login" />
         </label>
         <button disabled={disabled}>Login</button>
       </fieldset>

@@ -9,13 +9,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearCard } from "../../redux/slices/productCartSlice";
 import { AuthContext } from "../../App";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const NewOrder = () => {
   const { items, totalSum } = useSelector((state) => state.productCart),
     { setAuth } = useContext(AuthContext),
     dispatch = useDispatch(),
     navigate = useNavigate();
+
+  const [apiError, setApiError] = useState(false);
 
   const phoneRegex = new RegExp(
     /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
@@ -31,17 +33,22 @@ const NewOrder = () => {
   const {
     register,
     handleSubmit,
-    formState: { isValid, errors },
-    setValue,
+    formState: { isValid, isSubmitting, errors },
   } = useForm({
     mode: "onBlur",
     defaultValues: {
-      customer: `user1`,
-      phone: `050-123-4567`,
-      address: `Levka Lukianenka Ave, 17, Chernigiv`,
+      customer: ``,
+      phone: ``,
+      address: ``,
     },
     resolver: zodResolver(schema),
   });
+
+  useEffect(() => {
+    if (!totalSum && !isSubmitting) {
+      navigate("/Modules/AOS_Products");
+    }
+  }, [totalSum]);
 
   const hadleFormSubmit = async (data) => {
     const description = JSON.stringify(items);
@@ -51,20 +58,29 @@ const NewOrder = () => {
       priority_c: data.priority,
       shipping_address_city: data.address,
       description,
+      total_amt: totalSum,
     };
-    const responce = await crm.createInvoice(requestAtributes);
-    if (responce.data && responce.data.id) {
-      dispatch(clearCard());
-      setAuth( () => data.customer )
-      navigate("/Modules/AOS_Invoices/" + responce.data.id);
-    } else {
-      alert("API error!");
+    try {
+      const responce = await crm.createInvoice(requestAtributes);
+      if (responce.data && responce.data.id) {
+        dispatch(clearCard());
+        setAuth(() => data.customer);
+        navigate("/Modules/AOS_Invoices/" + responce.data.id);
+      } else {
+        setApiError(() => true);
+      }
+    } catch (e) {
+      setApiError(() => true);
+      console.error(e);
     }
   };
 
   return (
     <section>
       <h2>Ready to order? Let`s go!</h2>
+      <div className={"new-order__api_error " + (apiError ? "api_error" : "")}>
+        Something went wrong
+      </div>
       <form
         className="new-order__form"
         onSubmit={handleSubmit(hadleFormSubmit)}
@@ -89,6 +105,7 @@ const NewOrder = () => {
               name="phone"
               type="text"
               className={errors.phone ? "validation_error" : ""}
+              placeholder="999-999-9999"
             />
           </div>
           <p className={"new-order__error "}>
@@ -101,6 +118,7 @@ const NewOrder = () => {
               name="address"
               type="text"
               className={errors.address ? "validation_error" : ""}
+              placeholder="Street, Buiding, City"
             />
           </div>
           <p className="new-order__error">
@@ -112,7 +130,7 @@ const NewOrder = () => {
           </div>
           <p className="new-order__error"></p>
         </fieldset>
-        <button disabled={!isValid}>
+        <button disabled={!isValid || isSubmitting}>
           ORDER NOW FOR {showPriceAmount(totalSum)}
         </button>
       </form>
