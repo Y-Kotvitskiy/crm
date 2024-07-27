@@ -59,7 +59,8 @@ const moduleList = {
 const detailView = {
   defaultTitle: `name`,
   AOS_Invoices: {
-    fields: [`number`, `name`, `status`, `phone_c`, `description`],
+    title: `number`,
+    fields: [ `name`, `status`, `phone_c`, `description`],
   },
   Accounts: {
     fields: [

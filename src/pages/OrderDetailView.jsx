@@ -14,8 +14,6 @@ const OrderDetailView = () => {
         error,
       } = useDetailView('AOS_Invoices');
 
-
-
     if (isLoadint) {
     return <p>{module} record data is loading ..</p>;
     }
@@ -25,16 +23,18 @@ const OrderDetailView = () => {
     return <p> Failed fetching  record data .. </p>;
     }
 
+    console.log(title, record, fields); 
+
     return record && fields.length > 0 ? (
-        <section className="detailview">
-          <h2 className="detailview__title">
-            <span className="detailview__module_title">{record.type}: </span>
-            <span className="detailview__record_name">
+        <section className="orderview">
+          <h2 className="orderview__title">
+            <span className="orderview__module_title">Order #: </span>
+            <span className="orderview__record_name">
               {record.attributes[title]}
             </span>
           </h2>
           {images.length > 0 ? (
-            <div className="detailview__images">
+            <div className="orderview__images">
               {images.map((title) => (
                 <ModuleField
                   key={typeof title === `object` ? title.name : title}
@@ -45,20 +45,20 @@ const OrderDetailView = () => {
             </div>
           ) : null}
           {attributes.length > 0 ? (
-            <ul className="detailview__attibutes">
+            <ul className="orderview__attibutes">
               {attributes.map((title) => (
                 <ModuleField
                   key={typeof title === `object` ? title.name : title}
                   title={title}
                   record={record.attributes}
-                  schrink={schrink}
+                  schrink={false}
                 />
               ))}
             </ul>
           ) : (
             0
           )}
-          {images.length > 0 ? <div className="detailview__buttons"></div> : null}
+          {images.length > 0 ? <div className="orderview__buttons"></div> : null}
         </section>
       ) : (
         "Loading"

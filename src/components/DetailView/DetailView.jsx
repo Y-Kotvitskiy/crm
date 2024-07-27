@@ -22,8 +22,6 @@ const DetailView = ({ schrink }) => {
     return <p> Failed fetch modules .. </p>;
   }
 
-  console.log(title, record)
-
   return record && fields.length > 0 ? (
     <section className="detailview">
       <h2 className="detailview__title">

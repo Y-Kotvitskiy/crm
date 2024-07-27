@@ -6,7 +6,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 
 const useDetailView = (recordModule = null) => {
-  const { module, id } = useParams();
+  const { module: paramModule, id } = useParams();
+
+  const module = paramModule ? paramModule : recordModule;
+
   const {
     data: record,
     isLoadint,
@@ -44,11 +47,10 @@ const useDetailView = (recordModule = null) => {
     }
   }, [record]);
 
-  const title = useCallback(() => {
-    return detailView[module] && detailView[module].title
+  const title =  detailView[module] && detailView[module].title
       ? detailView[module].title
       : detailView.defaultTitle;
-  }, [module]);
+
 
   useEffect(() => {
     if (!user && !defaultModules.includes(module)) {
