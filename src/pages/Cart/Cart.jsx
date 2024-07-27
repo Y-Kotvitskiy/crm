@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { showPriceAmount } from "../../utils/utils";
 import CardRecord from "../../components/CardRecord/CardRecord";
 import { clearCard } from "../../redux/slices/productCartSlice";

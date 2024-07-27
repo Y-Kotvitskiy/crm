@@ -5,14 +5,17 @@ import { crm } from "../../services/suitecrm";
 import { showPriceAmount } from "../../utils/utils";
 import "./NewOrder.css";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearCard } from "../../redux/slices/productCartSlice";
+import { AuthContext } from "../../App";
+import { useContext } from "react";
 
 const NewOrder = () => {
-  const handleCreate = async () => {
-    const data = await crm.createInvoice();
-    console.log("Create", data);
-  };
-
-  const { items, totalSum } = useSelector((state) => state.productCart);
+  const { items, totalSum } = useSelector((state) => state.productCart),
+    { setAuth } = useContext(AuthContext),
+    dispatch = useDispatch(),
+    navigate = useNavigate();
 
   const phoneRegex = new RegExp(
     /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
@@ -22,34 +25,41 @@ const NewOrder = () => {
     customer: z.string().trim().min(4).max(150),
     phone: z.string().min(11).regex(phoneRegex, "Invalid Number!"),
     address: z.string().min(5).max(255),
+    priority: z.boolean(),
   });
 
   const {
     register,
     handleSubmit,
     formState: { isValid, errors },
+    setValue,
   } = useForm({
     mode: "onBlur",
     defaultValues: {
       customer: `user1`,
       phone: `050-123-4567`,
-      address: `Levka Lukianenka Ave, 17, Chernigiv`
+      address: `Levka Lukianenka Ave, 17, Chernigiv`,
     },
     resolver: zodResolver(schema),
   });
-
-  console.log(`errors`, errors, isValid);
 
   const hadleFormSubmit = async (data) => {
     const description = JSON.stringify(items);
     const requestAtributes = {
       name: data.customer,
       phone_c: data.phone,
+      priority_c: data.priority,
       shipping_address_city: data.address,
       description,
     };
     const responce = await crm.createInvoice(requestAtributes);
-    console.log(responce);
+    if (responce.data && responce.data.id) {
+      dispatch(clearCard());
+      setAuth( () => data.customer )
+      navigate("/Modules/AOS_Invoices/" + responce.data.id);
+    } else {
+      alert("API error!");
+    }
   };
 
   return (

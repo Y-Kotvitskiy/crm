@@ -33,13 +33,6 @@ const crm = {
       await crm.getToken();
     }
 
-    let pizza = [
-      { p: 1, name: `pizza` },
-      { p: 2, name: `pizza` },
-    ];
-
-    pizza = JSON.stringify(pizza);
-
     const request = await fetch(URL + `/V8/module`, {
       method: `POST`,
       headers: {
