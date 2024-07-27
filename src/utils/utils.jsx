@@ -20,5 +20,18 @@ const shrinkFieldValue = (value) => {
         return value
 }
 
+const parceItems = (description) => {
+    let items = null;
+    try {
+      if (description) {
+        const decodedString = document.createElement("textarea");
+        decodedString.innerHTML = description;
+        items = JSON.parse(decodedString.value);
+      }
+    } catch (error) {
+      console.error(`Can't get pizzas`, error);
+    }
+    return items;
+}
 
-export { showPriceAmount, shrinkFieldValue }
+export { showPriceAmount, shrinkFieldValue, parceItems }

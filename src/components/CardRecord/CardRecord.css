@@ -1,0 +1,29 @@
+.card__record {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    width: 60%;
+    min-width: 35em;
+    margin: 1em auto;
+  }
+  
+  .card__images {
+    width: 3em;
+  }
+  .card__image {
+    width: 100%;
+  }
+  .card__attributes {
+    display: flex;
+    align-items: center;
+  }
+  
+  .card__text {
+    padding: 0 1em;
+  }
+  
+  .card__buttons {
+    display: flex;
+    align-items: center;
+  }
+  

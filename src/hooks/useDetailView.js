@@ -1,4 +1,3 @@
-import { useCallback, useMemo } from "react";
 import { detailView, defaultModules } from "../constants/crm";
 import { AuthContext } from "../App";
 import useFetchRecord from "./useFetchRecord";

@@ -1,5 +1,5 @@
 const modulesCollection = [`AOS_Products`, `AOS_Invoices`, `Contacts`, `Calls`];
-const defaultModules = [`AOS_Products`];
+const defaultModules = [`AOS_Products`, `AOS_Invoices`];
 const defaultListSort = `name`;
 
 const moduleList = {

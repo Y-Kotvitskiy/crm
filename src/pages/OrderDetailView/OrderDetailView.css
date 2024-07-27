@@ -1,0 +1,7 @@
+.orderview .card__attributes {
+    width: 100%;
+}
+.orderview  .card_price {
+    width: 100%;
+    text-align: right;
+}

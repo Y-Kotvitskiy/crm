@@ -11,7 +11,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Cart from "./pages/Cart/Cart";
 import NewOrder from "./pages/NewOrder/NewOrder"; 
-import OrderDetailView from "./pages/OrderDetailView";
+import OrderDetailView from "./pages/OrderDetailView/OrderDetailView";
 export const AuthContext = createContext();
 
 function App() {

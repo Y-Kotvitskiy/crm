@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { showPriceAmount } from "../../utils/utils";
-import ListCart from "../../components/List/ListRecord/ListCart/ListCart";
+import CardRecord from "../../components/CardRecord/CardRecord";
 import { clearCard } from "../../redux/slices/productCartSlice";
 import "./Cart.css";
 
@@ -26,31 +26,7 @@ const Cart = () => {
           {totalCount} pcs., {showPriceAmount(totalSum)}
         </span>
       </h2>
-      {Object.keys(items).map((id) => (
-        <div className="card__record" key={id}>
-          <div className="card__images">
-            <img
-              className="card__image"
-              src={items[id].pizza.product_image}
-              alt={items[id].pizza.name}
-            />
-            {}
-          </div>
-          <div className="card__attributes">
-            <span className="card__text">{items[id].qty} x </span>
-            <NavLink to={`/Modules/AOS_Products/` + id}>
-              {items[id].pizza.name}
-            </NavLink>
-            <span className="card__text">
-              {" "}
-              {showPriceAmount(items[id].pizza.price)}
-            </span>
-          </div>
-          <div className="card__buttons">
-            <ListCart id={id} pizza={items[id].pizza} />
-          </div>
-        </div>
-      ))}
+      {Object.keys(items).map((id) => <CardRecord key ={id} id={id} item={items[id]}/>)}
       <div className="cart__footer_buttons">
         <button
           className="cart__order_button"
