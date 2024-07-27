@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Cart from "./pages/Cart/Cart";
 import NewOrder from "./pages/NewOrder/NewOrder"; 
+import OrderDetailView from "./pages/OrderDetailView";
 export const AuthContext = createContext();
 
 function App() {
@@ -26,6 +27,10 @@ function App() {
             <Route path="/Cart" element={<Cart />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Modules/AOS_Invoices/New" element={<NewOrder />} />
+            <Route
+              path="Modules/AOS_Invoices/:id"
+              element={<OrderDetailView schrink={false} />}
+            />
             <Route
               path="Modules/:module/:id"
               element={<DetailView schrink={false} />}

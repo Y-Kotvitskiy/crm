@@ -28,7 +28,7 @@ const crm = {
     crm.access_token = await result.access_token;
   },
 
-  createInvoice: async () => {
+  createInvoice: async (attributes) => {
     if (!crm.access_token) {
       await crm.getToken();
     }
@@ -49,10 +49,7 @@ const crm = {
       body: JSON.stringify({
         data: {
           type: "AOS_Invoices",
-          attributes: {
-            name: "Test account",
-            description: pizza,
-          },
+          attributes,
         },
       }),
     });
@@ -67,8 +64,8 @@ const crm = {
 
   getModulesUrl: () => URL + `/V8/meta/modules`,
 
-  getLitsUrl: (module = `Accounts`) =>
-    URL + `/V8/module/` + module + `?sort=name`,
+  getLitsUrl: (module = `Accounts`, sort = "name") =>
+    URL + `/V8/module/` + module + `?sort=` + sort,
 
   getRecordUrl: (module, id) => URL + `/V8/module/${module}/${id}`,
 

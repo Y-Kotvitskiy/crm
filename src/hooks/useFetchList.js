@@ -1,5 +1,5 @@
 import { crm } from "../services/suitecrm";
 import useFetchData from "./useFetchData";
 
-const useFetchList = (module) => useFetchData(crm.getLitsUrl(module));
+const useFetchList = (module, sort) => useFetchData(crm.getLitsUrl(module, sort));
 export default useFetchList;

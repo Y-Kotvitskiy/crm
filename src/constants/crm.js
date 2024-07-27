@@ -1,9 +1,11 @@
 const modulesCollection = [`AOS_Products`, `AOS_Invoices`, `Contacts`, `Calls`];
 const defaultModules = [`AOS_Products`];
+const defaultListSort = `name`;
 
 const moduleList = {
   AOS_Invoices: {
     fields: [`number`, `name`, `status`, `phone_c`, `description`],
+    sort: `-number`,
   },
   Accounts: {
     fields: [
@@ -12,7 +14,7 @@ const moduleList = {
       `assigned_user_name`,
       `date_entered`,
     ],
-    sord: `name`,
+    sort: `name`,
   },
   Contacts: {
     fields: [
@@ -27,7 +29,7 @@ const moduleList = {
       `phone_work`,
       `date_entered`,
     ],
-    sord: `name`,
+    sort: `name`,
   },
   Calls: {
     fields: [
@@ -41,7 +43,7 @@ const moduleList = {
       `direction`,
       `date_entered`,
     ],
-    sord: `name`,
+    sort: `name`,
   },
   AOS_Products: {
     fields: [
@@ -109,4 +111,10 @@ const detailView = {
   },
 };
 
-export { modulesCollection, defaultModules, moduleList, detailView };
+export {
+  modulesCollection,
+  defaultModules,
+  defaultListSort,
+  moduleList,
+  detailView,
+};

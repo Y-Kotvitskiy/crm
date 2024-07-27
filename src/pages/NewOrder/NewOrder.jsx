@@ -12,7 +12,7 @@ const NewOrder = () => {
     console.log("Create", data);
   };
 
-  const { totalSum } = useSelector((state) => state.productCart);
+  const { items, totalSum } = useSelector((state) => state.productCart);
 
   const phoneRegex = new RegExp(
     /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
@@ -21,7 +21,7 @@ const NewOrder = () => {
   const schema = z.object({
     customer: z.string().trim().min(4).max(150),
     phone: z.string().min(11).regex(phoneRegex, "Invalid Number!"),
-    address: z.string().min(5).max(255)
+    address: z.string().min(5).max(255),
   });
 
   const {
@@ -32,15 +32,24 @@ const NewOrder = () => {
     mode: "onBlur",
     defaultValues: {
       customer: `user1`,
-      phone: ``,
+      phone: `050-123-4567`,
+      address: `Levka Lukianenka Ave, 17, Chernigiv`
     },
     resolver: zodResolver(schema),
   });
 
   console.log(`errors`, errors, isValid);
 
-  const hadleFormSubmit = (data) => {
-    console.log(`data`, data);
+  const hadleFormSubmit = async (data) => {
+    const description = JSON.stringify(items);
+    const requestAtributes = {
+      name: data.customer,
+      phone_c: data.phone,
+      shipping_address_city: data.address,
+      description,
+    };
+    const responce = await crm.createInvoice(requestAtributes);
+    console.log(responce);
   };
 
   return (
