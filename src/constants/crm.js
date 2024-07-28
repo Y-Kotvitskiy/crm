@@ -1,10 +1,10 @@
 const modulesCollection = [`AOS_Products`, `AOS_Invoices`, `Contacts`, `Calls`];
-const defaultModules = [`AOS_Products`, `AOS_Invoices`];
+const defaultModules = [`AOS_Products`];
 const defaultListSort = `name`;
 
 const moduleList = {
   AOS_Invoices: {
-    fields: [`number`, `name`, `status`, `phone_c`, `priority_c`, `total_amt`],
+    fields: [`number`, `name`, `status`,`shipping_address_city`, `phone_c`, `priority_c`, `total_amt`],
     sort: `-number`,
   },
   Accounts: {
