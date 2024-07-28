@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { showPriceAmount } from "../../utils/utils";
 import "./CardRecord.css";
 
-const CardRecord = ({ id, item, buttons = true }) => {
+const CardRecord = ({ id, item, buttons = true, calcTotal = false }) => {
   return (
     <div className="card__record">
       <div className="card__images">
@@ -16,7 +16,7 @@ const CardRecord = ({ id, item, buttons = true }) => {
       <div className="card__attributes">
         <span className="card__text">{item.qty+ `x`}</span>
         <NavLink to={`/Modules/AOS_Products/` + id}>{item.pizza.name}</NavLink>
-        <span className="card__text card_price"> {showPriceAmount(item.pizza.price)}</span>
+        <span className="card__text card_price"> {showPriceAmount((calcTotal? item.qty * item.pizza.price : item.pizza.price))}</span>
       </div>
       {buttons ? (
         <div className="card__buttons">

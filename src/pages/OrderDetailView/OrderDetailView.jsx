@@ -52,7 +52,7 @@ const OrderDetailView = () => {
       const priority = responce.data.attributes.priority_c;
       setPriority(() => priority === `1`);
     } catch (e) {
-      alert(JSON.stringify(e))
+      alert(JSON.stringify(e));
     }
   };
 
@@ -92,7 +92,13 @@ const OrderDetailView = () => {
 
       {items
         ? Object.keys(items).map((id) => (
-            <CardRecord key={id} id={id} item={items[id]} buttons={false} />
+            <CardRecord
+              key={id}
+              id={id}
+              item={items[id]}
+              buttons={false}
+              calcTotal={true}
+            />
           ))
         : mull}
       <div className="orderview__footer">
