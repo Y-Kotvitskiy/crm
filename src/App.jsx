@@ -12,11 +12,15 @@ import { store } from "./redux/store";
 import Cart from "./pages/Cart/Cart";
 import NewOrder from "./pages/NewOrder/NewOrder"; 
 import OrderDetailView from "./pages/OrderDetailView/OrderDetailView";
+import IDB from "./storage/storage";
 export const AuthContext = createContext();
+export const idb = new IDB(`suitecrm`);
+
 
 function App() {
-  const [user, setAuth] = useState(null);
 
+  const [user, setAuth] = useState(null);
+  
   return (
     <Router>
       <Provider store={store}>
