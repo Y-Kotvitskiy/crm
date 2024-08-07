@@ -9,6 +9,10 @@ const crm = {
   access_token: null,
 
   getToken: async () => {
+    if (!crm.access_token) {
+      crm.access_token = localStorage.getItem("access_token");
+      if (crm.access_token) return;
+    }
     const request = await fetch(URL + `/index.php/access_token`, {
       method: `POST`,
       headers: {
@@ -25,13 +29,30 @@ const crm = {
       throw Error(`Failed get access token`);
     }
     const result = await request.json();
-    crm.access_token = await result.access_token;
+    crm.access_token = result.access_token;
+    localStorage.setItem("access_token", crm.access_token);
   },
 
-  createInvoice: async (attributes) => {
+  updateToken: async () => {
+    localStorage.removeItem(`access_token`);
+    crm.access_token = null;
+    await crm.getToken();
+  },
+
+  checkTokenState: async (tokenUpdate) => {
+    if (tokenUpdate > 1) {
+      throw `Update token error!`;
+    }
+
     if (!crm.access_token) {
       await crm.getToken();
     }
+
+    return ++tokenUpdate;
+  },
+
+  createInvoice: async (attributes, tokenUpdate = 0) => {
+    tokenUpdate = await crm.checkTokenState(tokenUpdate);
 
     const request = await fetch(URL + `/V8/module`, {
       method: `POST`,
@@ -48,7 +69,12 @@ const crm = {
     });
 
     if (!request.ok) {
-      throw Error(`Failed to post order`);
+      if (request.status === 401) {
+        await crm.updateToken();
+        return crm.createInvoice(attributes, tokenUpdate);
+      } else {
+        throw Error(`Failed to post order`);
+      }
     }
 
     const result = await request.json();
@@ -92,22 +118,25 @@ const crm = {
 
   getRecordUrl: (module, id) => URL + `/V8/module/${module}/${id}`,
 
-  fetchData: async (url) => {
-    if (!crm.access_token) {
-      await crm.getToken();
-    }
+  fetchData: async (url, tokenUpdate = 0) => {
+    tokenUpdate = await crm.checkTokenState(tokenUpdate);
 
-    const responce = await fetch(url, {
+    const request = await fetch(url, {
       method: `GET`,
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + crm.access_token,
       },
     });
-    if (!responce.ok) {
-      throw Error(`Failed fetch data`);
+    if (!request.ok) {
+      if (request.status === 401) {
+        await crm.updateToken();
+        return await crm.fetchData(url, tokenUpdate);
+      } else {
+        throw Error(`Failed to fetch data ` + url);
+      }
     }
-    const result = await responce.json();
+    const result = await request.json();
     return result.data;
   },
 };
