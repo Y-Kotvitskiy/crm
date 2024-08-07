@@ -6,15 +6,15 @@ import DetailView from "./components/DetailView/DetailView";
 import { Routes, BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
-import { ProductCardProvider } from "./contexts/ProductCardContext";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Cart from "./pages/Cart/Cart";
 import NewOrder from "./pages/NewOrder/NewOrder"; 
 import OrderDetailView from "./pages/OrderDetailView/OrderDetailView";
 import IDB from "./storage/storage";
+import { modulesCollection } from "./constants/crm";
 export const AuthContext = createContext();
-export const idb = new IDB(`suitecrm`);
+export const idb = new IDB(`suitecrm`, modulesCollection);
 
 
 function App() {
