@@ -23,6 +23,9 @@ class IDB {
           keyPath: `id`,
         });
       });
+      const objectStore = db.createObjectStore(`module_updated`, {
+        keyPath: `name`,
+      });
     },
   };
   constructor(name, modulesCollection) {
@@ -34,6 +37,24 @@ class IDB {
       openRequest.addEventListener(event, handler);
     }
   }
+
+  addRecords = (module, records) => {
+
+    console.log(`record`,module, records)
+    let tx = this.db.transaction(module, `readwrite`);
+    tx.oncomplite = (ev) => {
+      console.log(ev);
+    };
+    tx.oncomplite = (ev) => {
+      console.log(ev);
+    };
+
+    const store = tx.objectStore(module);
+    records.forEach((record) => {
+      store.add(record);
+    });
+    //    const request = ;
+  };
 }
 
 export default IDB;
