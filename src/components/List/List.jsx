@@ -1,7 +1,11 @@
 import ListRecord from "./ListRecord/ListRecord";
-import { moduleList, defaultModules, defaultListSort } from "./../../constants/crm";
+import {
+  moduleList,
+  defaultModules,
+  defaultListSort,
+} from "./../../constants/crm";
 import useFetchList from "../../hooks/useFetchList";
-import useFetchStore from "../../hooks/useFetchStore";
+import useFetchStoredList from "../../hooks/useFetchStoredList";
 import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../App";
@@ -25,8 +29,12 @@ export default function List() {
     isLoadint,
     error,
     getData,
-  } = useFetchStore  (name, (moduleList[name] && moduleList[name].sort ? moduleList[name].sort : defaultListSort));
-
+  } = useFetchStoredList(
+    name,
+    moduleList[name] && moduleList[name].sort
+      ? moduleList[name].sort
+      : defaultListSort
+  );
 
   const navigate = useNavigate();
 

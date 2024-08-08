@@ -66,6 +66,18 @@ class IDB {
       request.onerror = () => reject(request.error);
     });
   };
+
+  getRecord = async (module, id) => {
+    const db = await this.conn;
+    const tx = db.transaction(module, `readonly`);
+    return new Promise((resolve, reject) => {
+      const store = tx.objectStore(module);
+      const request = store.get(id);
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  };
+
 }
 
 export default IDB;

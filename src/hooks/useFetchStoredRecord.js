@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { idb } from "../App";
 
-const useFetchStore = (module) => {
+const useFetchStoredRecord = (module, id) => {
   const [data, setData] = useState(null);
   const [isLoadint, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -9,11 +9,8 @@ const useFetchStore = (module) => {
   const getData = useCallback(async () => {
     try {
       setLoading(true);
-      const recordList = await idb.getAllList(module);
-      setData(() => {
-        const data = recordList.map((record) => ({ id: record.id, attributes: record }) );
-        return data;
-      });
+      const data = await idb.getRecord(module, id);
+      setData(() => ({type:module, id: data.id,  attributes:data}));
     } catch (e) {
       setError(e);
     } finally {
@@ -28,4 +25,4 @@ const useFetchStore = (module) => {
   return { data, isLoadint, error, getData };
 };
 
-export default useFetchStore;
+export default useFetchStoredRecord;

@@ -1,19 +1,27 @@
 import { detailView, defaultModules } from "../constants/crm";
 import { AuthContext } from "../App";
-import useFetchRecord from "./useFetchRecord";
+//import useFetchRecord from "./useFetchRecord";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
+import useFetchStoredRecord from "./useFetchStoredRecord";
 
 const useDetailView = (recordModule = null) => {
   const { module: paramModule, id } = useParams();
 
   const module = paramModule ? paramModule : recordModule;
 
+  // const {
+  //   data: record,
+  //   isLoadint,
+  //   error,
+  // } = useFetchRecord(recordModule ? recordModule : module, id);
+
   const {
     data: record,
     isLoadint,
     error,
-  } = useFetchRecord(recordModule ? recordModule : module, id);
+  } = useFetchStoredRecord(recordModule ? recordModule : module, id);
+
 
   const [{ fields, images, attributes }, setFields] = useState({
     fields: [],
