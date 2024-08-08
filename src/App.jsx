@@ -11,7 +11,7 @@ import { store } from "./redux/store";
 import Cart from "./pages/Cart/Cart";
 import NewOrder from "./pages/NewOrder/NewOrder"; 
 import OrderDetailView from "./pages/OrderDetailView/OrderDetailView";
-import IDB from "./storage/storage";
+import IDB from "./storage/IDB";
 import { modulesCollection } from "./constants/crm";
 export const AuthContext = createContext();
 export const idb = new IDB(`suitecrm`, modulesCollection);
